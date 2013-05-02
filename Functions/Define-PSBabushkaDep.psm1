@@ -15,6 +15,7 @@ function Define-PSBabushkaDep {
   $This.Meet = $Meet
   $This.Before = $Before
   $This.After = $After
+  $This.Path = $MyInvocation.PSCommandPath
 
   return $This
 }

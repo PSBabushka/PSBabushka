@@ -12,14 +12,14 @@ function Invoke-PSBabushkaDep {
   $Name = $BabushkaDep.Name
 
   if($BabushkaDep.Met.Invoke()) {
-    Write-Host "[$Name] - Already met!"
+    Write-Output "[$Name] - Already met!"
   } else {
-    Write-Host "[$Name] - Not met. Meeting now."
+    Write-Output "[$Name] - Not met. Meeting now."
     Invoke-Command $BabushkaDep.Before
     Invoke-Command $BabushkaDep.Meet
     Invoke-Command $BabushkaDep.After
     if ($BabushkaDep.Met.Invoke()) {
-      Write-Host "[$Name] - Now met!"
+      Write-Output "[$Name] - Now met!"
     } else {
       throw "[$Name] - Still not met!"
     }
