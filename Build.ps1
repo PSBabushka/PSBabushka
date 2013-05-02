@@ -1,0 +1,1 @@
+Invoke-PSake -BuildFile 'PSake.ps1'
