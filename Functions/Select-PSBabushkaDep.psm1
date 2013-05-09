@@ -1,4 +1,4 @@
-function Find-PSBabushkaDep {
+function Select-PSBabushkaDep {
   param(
     [Parameter(Mandatory=$True)] [String] $Name
   )

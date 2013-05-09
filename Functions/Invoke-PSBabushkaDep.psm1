@@ -1,4 +1,4 @@
-Import-Module "$PSScriptRoot\Find-PSBabushkaDep.psm1" -Force
+Import-Module "$PSScriptRoot\Select-PSBabushkaDep.psm1" -Force
 
 function Invoke-PSBabushkaDep {
   param(
@@ -6,7 +6,7 @@ function Invoke-PSBabushkaDep {
   )
 
   if ($BabushkaDep.Requires -ne $NULL) {
-    $BabushkaDep.Requires | ForEach-Object { Find-PSBabushkaDep -Name $_ } | ForEach-Object { Invoke-PSBabushkaDep -BabushkaDep $_ }
+    $BabushkaDep.Requires | ForEach-Object { Select-PSBabushkaDep -Name $_ } | ForEach-Object { Invoke-PSBabushkaDep -BabushkaDep $_ }
   }
 
   $Name = $BabushkaDep.Name
