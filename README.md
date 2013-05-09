@@ -32,7 +32,7 @@ With PSBabushka, we can wrap this in a Dep which will install PsGet if it is not
 
 `C:\PSBabushkaDeps\PsGet-Installed.Dep.ps1`
 ```
-Define-PSBabushkaDep `
+New-PSBabushkaDep `
   -Name 'PsGet-Installed' `
   -Met { Get-Command -Module 'PsGet' } `
   -Meet { (new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | Invoke-Expression PoshGit }
@@ -69,7 +69,7 @@ Going back to our example above, installing PsGet is often only a means to an en
 
 `C:\PSBabushkaDeps\PoshGit-Installed.Dep.ps1`
 ```
-Define-PSBabushkaDep `
+New-PSBabushkaDep `
   -Name 'PoshGit-Installed' `
   -Requires 'PsGet-Installed' `
   -Met { Get-Command -Module 'Posh-Git' } `

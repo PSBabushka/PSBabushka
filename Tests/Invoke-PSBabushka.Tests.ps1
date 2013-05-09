@@ -5,7 +5,7 @@ Import-Module (Join-Path -Path $Root -ChildPath 'Functions\Invoke-PSBabushka.psm
 
 Describe 'Invoke-PSBabushka' {
   It 'Loads Deps with .Dep.ps1 extension under a PSBabushkaDeps directory' {
-    Setup -File -Path "PSBabushkaDeps\A.Dep.ps1" -Content "Define-PSBabushkaDep -Name 'A' -Met { `$PSBabushka.A -eq 'A' } -Meet { `$PSBabushka.A = 'A' }"
+    Setup -File -Path "PSBabushkaDeps\A.Dep.ps1" -Content "New-PSBabushkaDep -Name 'A' -Met { `$PSBabushka.A -eq 'A' } -Meet { `$PSBabushka.A = 'A' }"
     $TestDrive = Resolve-Path $TestDrive
 
     Invoke-PSBabushka -Name 'A' -Path $TestDrive
@@ -19,7 +19,7 @@ Describe 'Invoke-PSBabushka' {
 
   It 'Does Not Load Deps under PSBabushkaDeps directory without the .Dep.ps1 extension' {
     $PSBabushka.Reset.Invoke()
-    Setup -File -Path "PSBabushkaDeps\A.ps1" -Content "Define-PSBabushkaDep -Name 'A' -Met { `$PSBabushka.A -eq 'A' } -Meet { `$PSBabushka.A = 'A' }"
+    Setup -File -Path "PSBabushkaDeps\A.ps1" -Content "New-PSBabushkaDep -Name 'A' -Met { `$PSBabushka.A -eq 'A' } -Meet { `$PSBabushka.A = 'A' }"
     $TestDrive = Resolve-Path $TestDrive
 
     try { Invoke-PSBabushka -Name 'A' -Path $TestDrive } catch { }
@@ -31,7 +31,7 @@ Describe 'Invoke-PSBabushka' {
   }
 
   It 'Does Not Load Deps with the .Dep.ps1 extension  under PSBabushkaDeps directory ' {
-    Setup -File -Path "A.Dep.ps1" -Content "Define-PSBabushkaDep -Name 'A' -Met { `$PSBabushka.A -eq 'A' } -Meet { `$PSBabushka.A = 'A' }"
+    Setup -File -Path "A.Dep.ps1" -Content "New-PSBabushkaDep -Name 'A' -Met { `$PSBabushka.A -eq 'A' } -Meet { `$PSBabushka.A = 'A' }"
     $TestDrive = Resolve-Path $TestDrive
 
     try { Invoke-PSBabushka -Name 'A' -Path $TestDrive } catch { }
@@ -43,7 +43,7 @@ Describe 'Invoke-PSBabushka' {
   }
 
   It 'Invokes The Given Dep' {
-    Setup -File -Path "PSBabushkaDeps\A.Dep.ps1" -Content "Define-PSBabushkaDep -Name 'A' -Met { `$PSBabushka.A -eq 'A' } -Meet { `$PSBabushka.A = 'A' }"
+    Setup -File -Path "PSBabushkaDeps\A.Dep.ps1" -Content "New-PSBabushkaDep -Name 'A' -Met { `$PSBabushka.A -eq 'A' } -Meet { `$PSBabushka.A = 'A' }"
 
     Invoke-PSBabushka -Name 'A' -Path $TestDrive
 

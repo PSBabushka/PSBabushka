@@ -1,5 +1,5 @@
 Import-Module "$PSScriptRoot\Find-PSBabushkaDep.psm1" -Force -DisableNameChecking
-Import-Module "$PSScriptRoot\Define-PSBabushkaDep.psm1" -Force -DisableNameChecking
+Import-Module "$PSScriptRoot\New-PSBabushkaDep.psm1" -Force -DisableNameChecking
 Import-Module "$PSScriptRoot\Invoke-PSBabushkaDep.psm1" -Force -DisableNameChecking
 
 function Invoke-PSBabushka {

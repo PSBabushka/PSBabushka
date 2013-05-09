@@ -1,4 +1,4 @@
-function Define-PSBabushkaDep {
+function New-PSBabushkaDep {
   param(
     [Parameter(Mandatory=$True)]  [String]      $Name,
     [Parameter(Mandatory=$False)] [String[]]    $Requires,
