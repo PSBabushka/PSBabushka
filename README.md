@@ -30,7 +30,7 @@ PSGet is a popular tool for streamlining the installation of PowerShell modules 
 
 With PSBabushka, we can wrap this in a Dep which will install PsGet if it is not already available, but will know if it has been installed and instead do nothing.
 
-`PsGet-Installed.ps1`
+`C:\PSBabushkaDeps\PsGet-Installed.Dep.ps1`
 ```
 Define-PSBabushkaDep `
   -Name 'PsGet-Installed' `
@@ -67,7 +67,7 @@ The alternative to imperative scripting in declarative scripting, in where requi
 
 Going back to our example above, installing PsGet is often only a means to an end. While it was useful to automate the installer so we don't have to look it up each time, we can take the example further to demonstrate how to install a PowerShell module via PsGet. In this example our earlier Dep, named `PsGet-Installed`, is referenced by our new Dep which aims to install the Posh-Git module.
 
-`PoshGit-Installed.ps1`
+`C:\PSBabushkaDeps\PoshGit-Installed.Dep.ps1`
 ```
 Define-PSBabushkaDep `
   -Name 'PoshGit-Installed' `

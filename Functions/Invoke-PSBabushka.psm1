@@ -8,7 +8,7 @@ function Invoke-PSBabushka {
     [Parameter(Mandatory=$False)] [String] $Path = (Get-Location)
   )
 
-  $PSBabushka.Deps = Get-ChildItem -Path $Path -Include "*.Dep.ps1" -Recurse | ForEach-Object { $_.PSPath } | ForEach-Object { Invoke-Expression $_ }
+  $PSBabushka.Deps = Get-ChildItem -Path $Path -Directory -Include 'PSBabushkaDeps' -Recurse | ForEach-Object { $_.PSPath } | ForEach-Object { Get-ChildItem -Path $_ -File -Include "*.Dep.ps1" -Recurse } | ForEach-Object { $_.PSPath } | ForEach-Object { Invoke-Expression $_ }
 
   $PSBabushka.Dep = Find-PSBabushkaDep -Name $Name
 
