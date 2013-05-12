@@ -1,8 +1,7 @@
 $Root = Resolve-Path -Path "$PSScriptRoot\.."
 
-Import-Module (Join-Path -Path $Root -ChildPath 'PSBabushka.psm1') -Force -DisableNameChecking
-Import-Module (Join-Path -Path $Root -ChildPath 'Functions\New-PSBabushkaDep.psm1') -Force -DisableNameChecking
-Import-Module (Join-Path -Path $Root -ChildPath 'Functions\Select-PSBabushkaDep.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path -Path $Root -ChildPath 'PSBabushka') -Force
+Import-Module (Join-Path -Path $Root -ChildPath 'Functions\Select-PSBabushkaDep.psm1') -Force
 
 Describe 'Select-PSBabushkaDep' {
   It 'Selects By Dep Name' {

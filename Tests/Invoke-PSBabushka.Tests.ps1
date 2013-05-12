@@ -1,7 +1,7 @@
 $Root = Resolve-Path -Path "$PSScriptRoot\.."
 
-Import-Module (Join-Path -Path $Root -ChildPath 'PSBabushka.psm1') -Force -DisableNameChecking
-Import-Module (Join-Path -Path $Root -ChildPath 'Functions\Invoke-PSBabushka.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path -Path $Root -ChildPath 'PSBabushka') -Force
+Import-Module (Join-Path -Path $Root -ChildPath 'Functions\Invoke-PSBabushka.psm1') -Force
 
 Describe 'Invoke-PSBabushka' {
   It 'Loads Deps with .Dep.ps1 extension under a PSBabushkaDeps directory' {

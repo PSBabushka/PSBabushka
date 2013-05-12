@@ -1,28 +1,30 @@
 Import-Module "$PSScriptRoot\Select-PSBabushkaDep.psm1" -Force
 
-function Invoke-PSBabushkaDep {
-  param(
-    [Parameter(Mandatory=$True)] [Hashtable] $BabushkaDep
+Function Invoke-PSBabushkaDep {
+  Param (
+    [Parameter(Mandatory=$True)] [Hashtable] $PSBabushkaDep
   )
 
-  if ($BabushkaDep.Requires -ne $NULL) {
-    $BabushkaDep.Requires | ForEach-Object { Select-PSBabushkaDep -Name $_ } | ForEach-Object { Invoke-PSBabushkaDep -BabushkaDep $_ }
+  if ($PSBabushkaDep.Requires -ne $NULL) {
+    $PSBabushkaDep.Requires | ForEach-Object { Select-PSBabushkaDep -Name $_ } | ForEach-Object { Invoke-PSBabushkaDep $_ }
   }
 
-  $Name = $BabushkaDep.Name
+  $Name = $PSBabushkaDep.Name
 
-  if($BabushkaDep.Met.Invoke()) {
+  if($PSBabushkaDep.Met.Invoke()) {
     Write-Output "[$Name] - Already met!"
   } else {
-    if ($BabushkaDep.RequiresWhenUnmet -ne $NULL) {
-      $BabushkaDep.RequiresWhenUnmet | ForEach-Object { Select-PSBabushkaDep -Name $_ } | ForEach-Object { Invoke-PSBabushkaDep -BabushkaDep $_ }
+    if ($PSBabushkaDep.RequiresWhenUnmet -ne $NULL) {
+      $PSBabushkaDep.RequiresWhenUnmet | ForEach-Object { Select-PSBabushkaDep -Name $_ } | ForEach-Object { Invoke-PSBabushkaDep $_ }
     }
-    
+
     Write-Output "[$Name] - Not met. Meeting now."
-    Invoke-Command $BabushkaDep.Before
-    Invoke-Command $BabushkaDep.Meet
-    Invoke-Command $BabushkaDep.After
-    if ($BabushkaDep.Met.Invoke()) {
+    
+    Invoke-Command $PSBabushkaDep.Before
+    Invoke-Command $PSBabushkaDep.Meet
+    Invoke-Command $PSBabushkaDep.After
+
+    if ($PSBabushkaDep.Met.Invoke()) {
       Write-Output "[$Name] - Now met!"
     } else {
       throw "[$Name] - Still not met!"

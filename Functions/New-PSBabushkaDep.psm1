@@ -1,23 +1,22 @@
-function New-PSBabushkaDep {
-  param(
+Function New-PSBabushkaDep {
+  Param (
     [Parameter(Mandatory=$True)]  [String]      $Name,
     [Parameter(Mandatory=$False)] [String[]]    $Requires,
     [Parameter(Mandatory=$False)] [String[]]    $RequiresWhenUnmet,
     [Parameter(Mandatory=$True)]  [ScriptBlock] $Met,
     [Parameter(Mandatory=$True)]  [ScriptBlock] $Meet,
-    [Parameter(Mandatory=$False)] [ScriptBlock] $Before = {},
-    [Parameter(Mandatory=$False)] [ScriptBlock] $After  = {}
+    [Parameter(Mandatory=$False)] [ScriptBlock] $Before            = {},
+    [Parameter(Mandatory=$False)] [ScriptBlock] $After             = {}
   )
 
-  $This = @{}
-  $This.Name = $Name
-  $This.Requires = $Requires
-  $This.RequiresWhenUnmet = $RequiresWhenUnmet
-  $This.Met = $Met
-  $This.Meet = $Meet
-  $This.Before = $Before
-  $This.After = $After
-  $This.Path = $MyInvocation.PSCommandPath
-
-  return $This
+  return @{
+    Name              = $Name
+    Requires          = $Requires
+    RequiresWhenUnmet = $RequiresWhenUnmet
+    Met               = $Met
+    Meet              = $Meet
+    Before            = $Before
+    After             = $After
+    Path              = $MyInvocation.PSCommandPath
+  }
 }

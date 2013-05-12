@@ -1,1 +1,1 @@
-Invoke-PSake -BuildFile 'PSake.ps1'
+PowerShell "Invoke-PSake -BuildFile 'PSake.ps1'"
