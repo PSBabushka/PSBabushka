@@ -2,6 +2,7 @@ function New-PSBabushkaDep {
   param(
     [Parameter(Mandatory=$True)]  [String]      $Name,
     [Parameter(Mandatory=$False)] [String[]]    $Requires,
+    [Parameter(Mandatory=$False)] [String[]]    $RequiresWhenUnmet,
     [Parameter(Mandatory=$True)]  [ScriptBlock] $Met,
     [Parameter(Mandatory=$True)]  [ScriptBlock] $Meet,
     [Parameter(Mandatory=$False)] [ScriptBlock] $Before = {},
@@ -11,6 +12,7 @@ function New-PSBabushkaDep {
   $This = @{}
   $This.Name = $Name
   $This.Requires = $Requires
+  $This.RequiresWhenUnmet = $RequiresWhenUnmet
   $This.Met = $Met
   $This.Meet = $Meet
   $This.Before = $Before

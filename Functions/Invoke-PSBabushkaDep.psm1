@@ -14,6 +14,10 @@ function Invoke-PSBabushkaDep {
   if($BabushkaDep.Met.Invoke()) {
     Write-Output "[$Name] - Already met!"
   } else {
+    if ($BabushkaDep.RequiresWhenUnmet -ne $NULL) {
+      $BabushkaDep.RequiresWhenUnmet | ForEach-Object { Select-PSBabushkaDep -Name $_ } | ForEach-Object { Invoke-PSBabushkaDep -BabushkaDep $_ }
+    }
+    
     Write-Output "[$Name] - Not met. Meeting now."
     Invoke-Command $BabushkaDep.Before
     Invoke-Command $BabushkaDep.Meet

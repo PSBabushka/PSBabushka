@@ -71,9 +71,30 @@ Describe 'Invoke-PSBabushkaDep' {
     It 'Recurses Over Required Deps' {
       $ChildDep = New-PSBabushkaDep -Name 'Child' -Met { $PSBabushka.Child -eq $True } -Meet { $PSBabushka.Child = $True }
       $PSBabushka.Deps = @($ChildDep)
-      $ParentDep = New-PSBabushkaDep -Name 'Parent' -Met { $PSBabushka.Parent -eq $True } -Meet { $PSBabushka.Parent = $True } -Requires 'Child'
+      $ParentDep = New-PSBabushkaDep -Name 'Parent' -Requires 'Child' -Met { $PSBabushka.Parent -eq $True } -Meet { $PSBabushka.Parent = $True }
       Invoke-PSBabushkaDep $ParentDep | Out-Null
       $PSBabushka.Child | Should Be $True
+      $PSBabushka.Reset.Invoke()
+    }
+  }
+
+  Context 'Requires When Unmet' {
+    It 'Invokes the RequiresWhenUnmet block when the Dep is Unmet' {
+      $ChildDep = New-PSBabushkaDep -Name 'Child' -Met { $PSBabushka.Child -eq $True } -Meet { $PSBabushka.Child = $True }
+      $PSBabushka.Deps = @($ChildDep)
+      $ParentDep = New-PSBabushkaDep -Name 'Parent' -RequiresWhenUnmet 'Child' -Met { $PSBabushka.Parent -eq $True } -Meet { $PSBabushka.Parent = $True }
+      Invoke-PSBabushkaDep $ParentDep | Out-Null
+      $PSBabushka.Child | Should Be $True
+      $PSBabushka.Reset.Invoke()
+    }
+
+
+    It 'Skips the RequiresWhenUnmet block when the Dep is Met' {
+      $ChildDep = New-PSBabushkaDep -Name 'Child' -Met { $PSBabushka.Child -eq $True } -Meet { $PSBabushka.Child = $True }
+      $PSBabushka.Deps = @($ChildDep)
+      $ParentDep = New-PSBabushkaDep -Name 'Parent' -RequiresWhenUnmet 'Child' -Met { $True } -Meet { }
+      Invoke-PSBabushkaDep $ParentDep | Out-Null
+      $PSBabushka.Child | Should Not Be $True
       $PSBabushka.Reset.Invoke()
     }
   }
